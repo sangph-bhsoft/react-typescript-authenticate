@@ -1,0 +1,7 @@
+{
+    "cSpell.words": [
+        "browserslist",
+        "tailwindcss"
+    ],
+    "typescript.tsdk": "node_modules\\typescript\\lib"
+}
