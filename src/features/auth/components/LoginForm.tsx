@@ -1,20 +1,13 @@
 import React, { useRef } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { object, string } from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { loginRequest } from "../actions";
 import { AuthRequest } from "../types";
 import InputForm from "./InputForm";
 import { AppState } from "../../../redux/types";
 import { errorSelector } from "../selectors";
-
-const validationSchema = object().shape({
-  username: string().required("username is required!"),
-  password: string()
-    .required("password is required!")
-    .min(6, "password need minmium 6 charcaters!"),
-});
+import { validationSchema } from "../validator";
 
 const LoginForm = () => {
   const dispatch = useDispatch();

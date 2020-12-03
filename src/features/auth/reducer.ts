@@ -9,8 +9,8 @@ import { AuthState } from "./types";
 
 const INITIAL_STATE: AuthState = {
   isLogging: false,
-  isAuthenticate: false,
-  user: null,
+  isAuthenticate: !!localStorage.getItem("user"),
+  user: JSON.parse(localStorage.getItem("user") || "{}"),
   error: null,
 };
 
@@ -42,6 +42,7 @@ const authReducer = (
       };
 
     case LOGOUT:
+      localStorage.removeItem("user");
       return {
         ...state,
         isAuthenticate: false,
