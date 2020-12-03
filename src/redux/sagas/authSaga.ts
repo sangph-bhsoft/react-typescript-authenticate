@@ -11,7 +11,8 @@ function* authenticate({
   payload: { username, password },
 }: ReturnType<typeof loginRequest>) {
   try {
-    const user = yield call(loginSever, username, password);
+    const { user } = yield call(loginSever, username, password);
+    localStorage.setItem("user", JSON.stringify(user));
     yield put(loginSuccess(user));
   } catch ({ error }) {
     yield put(loginFailure(error.message));
