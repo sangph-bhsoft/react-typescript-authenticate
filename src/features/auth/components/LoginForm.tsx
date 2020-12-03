@@ -1,23 +1,20 @@
 import React, { useRef } from "react";
 import { useForm } from "react-hook-form";
-import { useDispatch, useSelector } from "react-redux";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { loginRequest } from "../actions";
 import { AuthRequest } from "../types";
 import InputForm from "./InputForm";
-import { AppState } from "../../../redux/types";
-import { errorSelector } from "../selectors";
 import { validationSchema } from "../validator";
 
-const LoginForm = () => {
-  const dispatch = useDispatch();
-  const error = useSelector((state: AppState) => errorSelector(state.auth));
+interface Props {
+  error: string | null;
+  onSubmit: (values: AuthRequest) => void;
+}
+
+const LoginForm: React.FC<Props> = ({ error, onSubmit }) => {
   const btnRef = useRef<HTMLButtonElement>(null);
   const { register, handleSubmit, errors } = useForm<AuthRequest>({
     resolver: yupResolver(validationSchema),
   });
-  const onSubmit = (values: AuthRequest) => dispatch(loginRequest(values));
-
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       btnRef.current?.click();
