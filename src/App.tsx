@@ -1,18 +1,17 @@
 import Auth from "./features/auth";
 import Home from "./features/home";
-import { Switch, BrowserRouter as Router } from "react-router-dom";
+import { Switch, BrowserRouter as Router, Route } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { AppState } from "./redux/types";
 import { isAuthenticateSelector } from "./features/auth/selectors";
 import PrivateRoute from "./components/PrivateRoute";
 import AuthRoute from "./components/AuthRoute";
+import NotFound from "./features/notFound";
 
 function App() {
   const isAuthenticate = useSelector((state: AppState) =>
     isAuthenticateSelector(state.auth)
   );
-  console.log(isAuthenticate);
-
   return (
     <Router>
       <Switch>
@@ -28,6 +27,7 @@ function App() {
           exact
           path="/login"
         />
+        <Route path="*" component={NotFound} />
       </Switch>
     </Router>
   );
